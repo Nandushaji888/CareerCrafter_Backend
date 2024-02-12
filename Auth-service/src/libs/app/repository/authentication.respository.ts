@@ -11,6 +11,15 @@ export default {
       console.log("error in authentication.repository userEmailExist", error);
     }
   },
+  userPhoneExist : async(phone:string)=> {
+    try {
+      let response = await User.findOne({phone:phone})
+      return response;
+    } catch (error) {
+      console.log("error in authentication.repository userEmailExist", error);
+
+    }
+  },
 
   createUser: async (data: any) => {
     let userData = {

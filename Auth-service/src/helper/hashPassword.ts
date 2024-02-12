@@ -2,6 +2,7 @@ import bcrypt from 'bcrypt'
 
 export const hashPassword = async(password:string) : Promise<string>=>{
    try {
+    
     console.log('reached here');
     const salt = await bcrypt.genSalt(10);
     console.log('saltttt',salt);

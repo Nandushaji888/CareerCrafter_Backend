@@ -1,6 +1,6 @@
 import { hashPassword } from "../../../helper";
 import { createAccessToken, createRefreshToken } from "../../../utils/jwt/jwt";
-export const verifyOTP_useCase = (dependencies: any) => {
+export const recruiter_verifyOTP_useCase = (dependencies: any) => {
   const {
     repository: { authenticationRepository },
   } = dependencies;
@@ -11,24 +11,24 @@ export const verifyOTP_useCase = (dependencies: any) => {
     const hashedPassword = await hashPassword(data?.password);
     const updatedData = { ...data, password: hashedPassword };
 
-    const addUserData = await authenticationRepository?.createUser(updatedData);
-    if (addUserData.status) {
+    const addRecruiterData = await authenticationRepository?.createRecruiter(updatedData);
+    if (addRecruiterData.status) {
       const accessToken = createAccessToken(
-        addUserData,
+        addRecruiterData,
         process.env.ACCESS_SECRET_KEY!,
         process.env.ACCESS_EXPIRY!
       );
       const refreshToken = createRefreshToken(
-        addUserData,
+        addRecruiterData,
         process.env.REFRESH_SECRET_KEY!,
         process.env.REFRESH_EXPIRY!
       );
       console.log(accessToken);
       console.log(refreshToken);
       
-      return { status: true, user: addUserData,refreshToken :refreshToken,accessToken:accessToken };
+      return { status: true, recruiter: addRecruiterData,refreshToken :refreshToken,accessToken:accessToken };
     } else {
-      return { status: false, messag: "error while creating user in otp verification usecase" };
+      return { status: false, messag: "error while creating recruiter in otp verification usecase" };
     }
   };
   return { executeFunction };

@@ -1,8 +1,8 @@
 import mongoose, { Schema, Document } from 'mongoose';
-import {IUser,AuthType} from '../../../../utils/interfaces/interface'
+import {IRecruiter,AuthType} from '../../../../utils/interfaces/interface'
 
 
-const userSchema: Schema<IUser> = new Schema<IUser>({
+const recruiterSchema: Schema<IRecruiter> = new Schema<IRecruiter>({
     name: String,
     email: {
         type: String,
@@ -22,7 +22,11 @@ const userSchema: Schema<IUser> = new Schema<IUser>({
     type: {
         type: String,
         enum: Object.values(AuthType),
-        default: AuthType.User
+        default: AuthType.Recruiter
+    },
+    worksAt:{
+        type:String,
+        required:true
     },
     status: {
         type: Boolean,
@@ -30,5 +34,5 @@ const userSchema: Schema<IUser> = new Schema<IUser>({
     }
 });
 
-const User = mongoose.model<IUser>("User", userSchema);
-export { User, AuthType };
+const Recruiter = mongoose.model<IRecruiter>("Recruiter", recruiterSchema);
+export { Recruiter, AuthType };

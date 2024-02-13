@@ -2,15 +2,17 @@ import { Request, Response } from "express";
 
 export default (dependencies: any) => {
   const {
-    useCase: { userLogin_useCase },
+    useCase: { adminLogin_useCase },
   } = dependencies;
 
-  const loginUserController = async (req: Request, res: Response) => {
+  const loginAdminController = async (req: Request, res: Response) => {
     const { email, password } = req.body.values
-    console.log(req.body);
+    // console.log('hereeeeeee');
+    
+    // console.log(req.body);
     
 
-    const response = await userLogin_useCase(dependencies).executeFunction(
+    const response = await adminLogin_useCase(dependencies).executeFunction(
       email,
       password
     );
@@ -18,18 +20,18 @@ export default (dependencies: any) => {
     if (!response?.status) {
       res.json({ status: false, message: response.message });
     } else {
-      const { user, accessToken, refreshToken } = response;
+      const { admin, accessToken, refreshToken } = response;
       req.session.refreshToken = refreshToken;
       const expirationDate = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000);
-      res.cookie("user-accessToken", accessToken, {
+      res.cookie("admin-accessToken", accessToken, {
         expires: expirationDate,
         httpOnly: true,
         secure: true,
       });
 
-      res.status(201).json({status:true,accessToken:accessToken,user:user})
+      res.status(201).json({status:true,accessToken:accessToken,admin:admin})
 
     }
   };
-  return loginUserController;
+  return loginAdminController;
 };

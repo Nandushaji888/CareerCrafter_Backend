@@ -14,8 +14,17 @@ declare module 'express-session' {
       email: string,
       password: string,
       phone: string
-    };
-    Otp: string;
+    }|undefined;
+    recruiterData: {
+      _id: string,
+      name: string,
+      email: string,
+      worksAr:string,
+      password: string,
+      phone: string
+    }|undefined;
+    Otp: string | undefined;
+    rOtp: string |undefined;
     refreshToken: string;
   }
 }

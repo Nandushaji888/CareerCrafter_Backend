@@ -1,35 +1,39 @@
 import { comparePassword } from "../../../helper/hashPassword";
 import { createAccessToken, createRefreshToken } from "../../../utils/jwt/jwt";
 
-export const userLogin_useCase = (dependencies: any) => {
+export const adminLogin_useCase = (dependencies: any) => {
   const {
     repository: { authenticationRepository },
   } = dependencies;
 
   const executeFunction = async (email: string, password: string) => {
-    const response = await authenticationRepository.findUser(email);
+    console.log('reached hereeee');
+    
+    const response = await authenticationRepository.findAdmin(email);
+    console.log(response);
+    
 
     if (!response.status) {
       return { status: false, message: "Email or Password is incorrect" };
     } else {
-      const { user } = response;
-      //   console.log(user);
-      const validPass = await comparePassword(password, user.password);
+      const { admin } = response;
+      //   console.log(recruiter);
+      const validPass = await comparePassword(password, admin.password);
 
       if (validPass) {
         const accessToken = createAccessToken(
-          user,
+          admin,
           process.env.ACCESS_SECRET_KEY!,
           process.env.ACCESS_EXPIRY!
         );
         const refreshToken = createRefreshToken(
-          user,
+          admin,
           process.env.REFRESH_SECRET_KEY!,
           process.env.REFRESH_EXPIRY!
         );
         console.log(accessToken);
         console.log(refreshToken);
-        return { status: true, user: user,accessToken:accessToken,refreshToken:refreshToken };
+        return { status: true, admin: admin,accessToken:accessToken,refreshToken:refreshToken };
       } else {
         return { status: false, message: "Email or Password is incorrect" };
       }

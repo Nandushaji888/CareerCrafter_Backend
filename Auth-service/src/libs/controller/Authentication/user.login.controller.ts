@@ -6,11 +6,10 @@ export default (dependencies: any) => {
   } = dependencies;
 
   const loginUserController = async (req: Request, res: Response) => {
-    const { email, password } = req.body.values
+    const { email, password } = req.body.values;
     console.log(req.body);
-    
 
-    const response = await userLogin_useCase(dependencies).executeFunction(
+    const response = await userLogin_useCase(dependencies)?.executeFunction(
       email,
       password
     );
@@ -18,17 +17,30 @@ export default (dependencies: any) => {
     if (!response?.status) {
       res.json({ status: false, message: response.message });
     } else {
-      const { user, accessToken, refreshToken } = response;
-      req.session.refreshToken = refreshToken;
-      const expirationDate = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000);
-      res.cookie("user-accessToken", accessToken, {
-        expires: expirationDate,
+      const { user, user_accessToken, user_refreshToken } = response;
+      // console.log('accessToken');
+      // console.log(accessToken);
+      // console.log('refreshToken');
+      // console.log(refreshToken);
+      
+
+      req.session.refreshToken = user_refreshToken;
+      // const expirationDate = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000);
+      res.cookie("user_accessToken", user_accessToken, {
+        maxAge: 300000,
         httpOnly: true,
         secure: true,
       });
+      res.cookie("user_refreshToken", user_refreshToken, {
+        maxAge: 3600000,
+        httpOnly: true,
+        secure: true,
+        sameSite: "strict",
+      });
 
-      res.status(201).json({status:true,accessToken:accessToken,user:user})
-
+      res
+        .status(201)
+        .json({ status: true, accessToken: user_accessToken, user: user });
     }
   };
   return loginUserController;

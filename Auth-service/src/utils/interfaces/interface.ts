@@ -4,7 +4,7 @@ export enum AuthType {
     Recruiter = 'recruiter'
 }
 
-export interface IUser extends Document {
+export interface IUser {
     name: string;
     email: string;
     phone: string;
@@ -13,7 +13,7 @@ export interface IUser extends Document {
     status: boolean;
 }
 
-export interface IRecruiter extends Document {
+export interface IRecruiter {
     name: string;
     email: string;
     phone: string;
@@ -23,7 +23,7 @@ export interface IRecruiter extends Document {
     status: boolean;
 }
 
-export interface IAdmin extends Document {
+export interface IAdmin {
     name: string;
     email: string;
     password: string;

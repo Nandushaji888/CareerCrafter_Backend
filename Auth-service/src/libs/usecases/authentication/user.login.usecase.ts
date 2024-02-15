@@ -17,19 +17,19 @@ export const userLogin_useCase = (dependencies: any) => {
       const validPass = await comparePassword(password, user.password);
 
       if (validPass) {
-        const accessToken = createAccessToken(
+        const user_accessToken = createAccessToken(
           user,
-          process.env.ACCESS_SECRET_KEY!,
-          process.env.ACCESS_EXPIRY!
+          process.env.ACCESS_SECRET_KEY || '',
+          process.env.ACCESS_EXPIRY || ''
         );
-        const refreshToken = createRefreshToken(
+        const user_refreshToken = createRefreshToken(
           user,
-          process.env.REFRESH_SECRET_KEY!,
-          process.env.REFRESH_EXPIRY!
+          process.env.REFRESH_SECRET_KEY ||'',
+          process.env.REFRESH_EXPIRY ||''
         );
-        console.log(accessToken);
-        console.log(refreshToken);
-        return { status: true, user: user,accessToken:accessToken,refreshToken:refreshToken };
+        // console.log(accessToken);
+        // console.log(refreshToken);
+        return { status: true, user: user,user_accessToken:user_accessToken,user_refreshToken:user_refreshToken };
       } else {
         return { status: false, message: "Email or Password is incorrect" };
       }

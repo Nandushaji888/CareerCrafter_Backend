@@ -4,6 +4,7 @@ import dependencies from "./config/dependencies";
 import { routes } from "./router";
 import session, { MemoryStore, SessionOptions, SessionData } from 'express-session'
 import dotenv from "dotenv";
+import cookieParser from 'cookie-parser'
 dotenv.config();
 
 declare module 'express-session' {
@@ -33,6 +34,7 @@ const app = express();
 const store = new MemoryStore()
 
 app.use(express.json());
+app.use(cookieParser())
 
 app.use(
   session({

@@ -17,12 +17,19 @@ export default (dependencies: any) => {
 
       if (response.status) {
         const { user, accessToken, refreshToken } = response;
+    
+        
         req.session.refreshToken = refreshToken;
-        const expirationDate = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000);
-        res.cookie("accessToken", accessToken, {
-          expires: expirationDate,
+        res.cookie("user-accessToken", accessToken, {
+          maxAge:300000,
           httpOnly: true,
           secure: true,
+        });
+        res.cookie("user-refreshToken", refreshToken, {
+          maxAge:3600000,
+          httpOnly: true,
+          secure: true,
+          sameSite:'strict'
         });
         req.session.Otp = undefined
         req.session.userData = undefined;

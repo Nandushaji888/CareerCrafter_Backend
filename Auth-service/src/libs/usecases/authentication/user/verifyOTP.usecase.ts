@@ -1,6 +1,6 @@
-import { hashPassword } from "../../../helper";
-import { createAccessToken, createRefreshToken } from "../../../utils/jwt/jwt";
-export const recruiter_verifyOTP_useCase = (dependencies: any) => {
+import { hashPassword } from "../../../../helper";
+import { createAccessToken, createRefreshToken } from "../../../../utils/jwt/jwt";
+export const verifyOTP_useCase = (dependencies: any) => {
   const {
     repository: { authenticationRepository },
   } = dependencies;
@@ -11,24 +11,24 @@ export const recruiter_verifyOTP_useCase = (dependencies: any) => {
     const hashedPassword = await hashPassword(data?.password);
     const updatedData = { ...data, password: hashedPassword };
 
-    const addRecruiterData = await authenticationRepository?.createRecruiter(updatedData);
-    if (addRecruiterData.status) {
+    const addUserData = await authenticationRepository?.createUser(updatedData);
+    if (addUserData.status) {
       const accessToken = createAccessToken(
-        addRecruiterData,
+        addUserData,
         process.env.ACCESS_SECRET_KEY!,
         process.env.ACCESS_EXPIRY!
       );
       const refreshToken = createRefreshToken(
-        addRecruiterData,
+        addUserData,
         process.env.REFRESH_SECRET_KEY!,
         process.env.REFRESH_EXPIRY!
       );
       console.log(accessToken);
       console.log(refreshToken);
       
-      return { status: true, recruiter: addRecruiterData,refreshToken :refreshToken,accessToken:accessToken };
+      return { status: true, user: addUserData,refreshToken :refreshToken,accessToken:accessToken };
     } else {
-      return { status: false, messag: "error while creating recruiter in otp verification usecase" };
+      return { status: false, messag: "error while creating user in otp verification usecase" };
     }
   };
   return { executeFunction };

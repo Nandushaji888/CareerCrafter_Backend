@@ -1,5 +1,5 @@
-import { comparePassword } from "../../../helper/hashPassword";
-import { createAccessToken, createRefreshToken } from "../../../utils/jwt/jwt";
+import { comparePassword } from "../../../../helper/hashPassword";
+import { createAccessToken, createRefreshToken } from "../../../../utils/jwt/jwt";
 
 export const userLogin_useCase = (dependencies: any) => {
   const {
@@ -7,7 +7,7 @@ export const userLogin_useCase = (dependencies: any) => {
   } = dependencies;
 
   const executeFunction = async (email: string, password: string) => {
-    const response = await authenticationRepository.findUser(email);
+    const response = await authenticationRepository?.findUser(email);
 
     if (!response.status) {
       return { status: false, message: "Email or Password is incorrect" };

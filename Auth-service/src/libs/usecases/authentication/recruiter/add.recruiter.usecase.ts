@@ -1,22 +1,22 @@
-import { sendOTP, hashPassword } from "../../../helper";
-import { IUser } from "../../../utils/interfaces/interface";
+import { sendOTP, hashPassword } from "../../../../helper";
+import { IRecruiter } from "../../../../utils/interfaces/interface";
 
-export const addUser_useCases = (dependencies: any) => {
+export const addRecruiter_useCases = (dependencies: any) => {
   const {
     repository: { authenticationRepository },
   } = dependencies;
 
-  const executeFunction = async (data: IUser) => {
+  const executeFunction = async (data: IRecruiter) => {
     try {
-      const userExist = await authenticationRepository?.userEmailExist(
+      const recruiterExist = await authenticationRepository?.recruiterEmailExist(
         data?.email
       );
 
-      if (userExist) {
+      if (recruiterExist) {
         return { status1: true, message: "Email already exists" };
       }
 
-      const phoneExist = await authenticationRepository.userPhoneExist(
+      const phoneExist = await authenticationRepository.recruiterPhoneExist(
         data?.phone
       );
       console.log(phoneExist);
@@ -25,13 +25,13 @@ export const addUser_useCases = (dependencies: any) => {
         return { status2: true, message: "Phone Number already exists" };
       }
 
-      const response = await sendOTP(data?.email);
+      const response = await sendOTP(data?.email,data?.name);
       console.log(response);
 
       if (response.status) {
         return { status: true, otp: response?.otp, data };
       } else {
-        return { status: false, message: response?.message };
+        return { status: false, message: "Error in sending verification OTP" };
       }
     } catch (error) {
       console.log(error);

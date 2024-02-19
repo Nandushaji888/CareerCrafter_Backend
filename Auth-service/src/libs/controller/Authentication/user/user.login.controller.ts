@@ -18,14 +18,8 @@ export default (dependencies: any) => {
       res.json({ status: false, message: response.message });
     } else {
       const { user, user_accessToken, user_refreshToken } = response;
-      // console.log('accessToken');
-      // console.log(accessToken);
-      // console.log('refreshToken');
-      // console.log(refreshToken);
-      
 
       req.session.refreshToken = user_refreshToken;
-      // const expirationDate = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000);
       res.cookie("user_accessToken", user_accessToken, {
         maxAge: 300000,
         httpOnly: true,

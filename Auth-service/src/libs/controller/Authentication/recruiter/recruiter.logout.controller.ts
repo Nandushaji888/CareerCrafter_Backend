@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { clearAccessTokenFromCookie } from "../../../utils/jwt/jwt";
+import { clearAccessTokenFromCookie } from "../../../../utils/jwt/jwt";
 
 export default (dependencies: any) => {
   const recruiterLogoutController = (req: Request, res: Response) => {

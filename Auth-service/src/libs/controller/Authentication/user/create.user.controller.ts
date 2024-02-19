@@ -4,6 +4,7 @@ export default (dependencies: any) => {
   const {
     useCase: { addUser_useCases },
   } = dependencies;
+  
 
   const createUserController = async (req: Request, res: Response) => {
     const { name, email, phone, password } = req.body.values;

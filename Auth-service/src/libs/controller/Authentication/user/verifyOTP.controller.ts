@@ -13,35 +13,35 @@ export default (dependencies: any) => {
       const response = await verifyOTP_useCase(dependencies).executeFunction(
         data
       );
-      console.log(response);
 
       if (response.status) {
         const { user, accessToken, refreshToken } = response;
-    
-        
+
         req.session.refreshToken = refreshToken;
         res.cookie("user-accessToken", accessToken, {
-          maxAge:300000,
+          maxAge: 300000,
           httpOnly: true,
           secure: true,
         });
         res.cookie("user-refreshToken", refreshToken, {
-          maxAge:3600000,
+          maxAge: 3600000,
           httpOnly: true,
           secure: true,
-          sameSite:'strict'
+          sameSite: "strict",
         });
-        req.session.Otp = undefined
+        req.session.Otp = undefined;
         req.session.userData = undefined;
 
-        res.status(201).json({status:true,accessToken:accessToken,user:user})
-
+        res
+          .status(201)
+          .json({ status: true, accessToken: accessToken, user: user });
       } else {
-        res.status(400).json({ status: false, message: response.message });
+        res.status(401).json({ status: false, message: response.message });
       }
     } else {
-      res.status(400).json({ status: false, message: "Incorrect otp" });
+      res.status(401).json({ status: false, message: "Incorrect OTP Provided" });
     }
   };
+
   return verifyOTPcontroller;
 };

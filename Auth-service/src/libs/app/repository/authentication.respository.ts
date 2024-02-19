@@ -108,5 +108,18 @@ export default {
       
     }
   },
+  setNewPassword:async(email:string,password:string)=> {
+    try {
+      const response = await User.updateOne({email:email},{password:password})
+      if(response){
+        return {status:true}
+      }else{
+        return {status:false,message:'Error in updating password'}
+      }
+    } catch (error) {
+      console.log(error,'error in setting new password');
+      
+    }
+  }
   
 };

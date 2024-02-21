@@ -12,6 +12,7 @@ import resendotp_controller from './resendOPT.controller'
 import user_forgot_password_controller from './user/user.forgot.password.controller'
 import ft_otp_otp_verify from './user/fp.otp.verify.controller'
 import user_create_new_pass_controller from './user/create.new.pass.controller'
+import user_google_signin_controller from './user/google.signin.controller'
 
 export default (dependencies:any)=>{
     return{
@@ -28,6 +29,8 @@ export default (dependencies:any)=>{
         resendOTPController:resendotp_controller(dependencies),
         forgotPasswordController:user_forgot_password_controller(dependencies),
         fpOTPVerifyController :ft_otp_otp_verify(dependencies),
-        userCreateNewPassController:user_create_new_pass_controller(dependencies)
+        userCreateNewPassController:user_create_new_pass_controller(dependencies),
+        userGoogleSigninController :user_google_signin_controller(dependencies),
+
     }
 }

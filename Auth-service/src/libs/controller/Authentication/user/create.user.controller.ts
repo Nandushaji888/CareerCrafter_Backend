@@ -19,7 +19,7 @@ export default (dependencies: any) => {
     };
     // console.log("data", data);
 
-    const response = await addUser_useCases(dependencies).executeFunction(data);
+    const response = await addUser_useCases(dependencies)?.executeFunction(data);
     // console.log(response);
 
     if (response?.status) {

@@ -31,7 +31,11 @@ const recruiterSchema: Schema<IRecruiter> = new Schema<IRecruiter>({
     status: {
         type: Boolean,
         default: true
-    }
+    },
+    isGoogle:{
+        type:Boolean,
+        default:false
+      }
 });
 
 const Recruiter = mongoose.model<IRecruiter>("Recruiter", recruiterSchema);

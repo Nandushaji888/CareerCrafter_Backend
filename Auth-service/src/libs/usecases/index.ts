@@ -7,7 +7,8 @@ import {
   recruiter_verifyOTP_useCase,
   adminLogin_useCase,
   userForgotPassword_useCase,
-  userNewPassword_useCase
+  userNewPassword_useCase,
+  userGoogleAuthuseCase
 } from "./authentication";
 
 export {
@@ -19,5 +20,6 @@ export {
   recruiter_verifyOTP_useCase,
   adminLogin_useCase,
   userForgotPassword_useCase,
-  userNewPassword_useCase
+  userNewPassword_useCase,
+  userGoogleAuthuseCase
 };

@@ -22,11 +22,20 @@ export default {
   },
 
   createUser: async (data: any) => {
+
+    // if(data?.isGoogle){
+    //   let userData = {
+    //     name: data.name,
+    //     email: data.email,
+    //     isGoogle:data.isGoogle
+    //   };
+    // }
     let userData = {
       name: data.name,
       email: data.email,
       phone:data.phone,
       password: data.password,
+      isGoogle:data.isGoogle?true:false
     };
     let response = await User.create(userData);
     if (response) {
@@ -120,6 +129,22 @@ export default {
       console.log(error,'error in setting new password');
       
     }
-  }
+  },
+  isGoogleTrue:async(email:string)=> {
+    try {
+      const response = await User.updateOne({email:email},{isGoogle:true})
+      if(response){
+        return {status:true}
+      }else{
+        return {status:false,message:'Error in signin with google'}
+
+      }
+    } catch (error) {
+      
+      console.log(error,'error in isGoogleTrue');
+
+    }
+  },
+  
   
 };

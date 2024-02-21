@@ -11,8 +11,7 @@ export default (dependencies :any)=> {
             console.log('email',email);
             const response = await userForgotPassword_useCase(dependencies)?.executeFunction(email)
             if(response.status){
-                // console.log('response.otp');
-                // console.log(response.otp);
+   
                 
                 req.session.Otp= response.otp;
                 // console.log('response');

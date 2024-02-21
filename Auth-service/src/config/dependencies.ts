@@ -9,7 +9,8 @@ import {
   recruiter_verifyOTP_useCase,
   adminLogin_useCase,
   userForgotPassword_useCase,
-  userNewPassword_useCase
+  userNewPassword_useCase,
+  userGoogleAuthuseCase
 } from "../libs/usecases";
 
 const useCase: any = {
@@ -21,7 +22,8 @@ const useCase: any = {
   recruiter_verifyOTP_useCase,
   adminLogin_useCase,
   userForgotPassword_useCase,
-  userNewPassword_useCase
+  userNewPassword_useCase,
+  userGoogleAuthuseCase
 };
 const repository: any = {
   authenticationRepository,

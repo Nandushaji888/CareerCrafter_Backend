@@ -11,6 +11,7 @@ export interface IUser {
     password: string;
     type: AuthType;
     status: boolean;
+    isGoogle:boolean;
 }
 
 export interface IRecruiter {
@@ -21,6 +22,7 @@ export interface IRecruiter {
     worksAt:string,
     type: AuthType;
     status: boolean;
+    isGoogle:boolean;
 }
 
 export interface IAdmin {

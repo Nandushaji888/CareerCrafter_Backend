@@ -15,7 +15,7 @@ const postSchema: Schema<IPost> = new Schema<IPost>({
     type: String,
     required: true,
   },
-  responsabilities: {
+  responsibilities: {
     type: String,
     required: true,
 
@@ -24,7 +24,7 @@ const postSchema: Schema<IPost> = new Schema<IPost>({
     type: String,
     required: true,
   },
-  skillsRequired: {
+  skills: {
     type: String,
   },
   qualification: {
@@ -37,11 +37,10 @@ const postSchema: Schema<IPost> = new Schema<IPost>({
     type: mongoose.Schema.Types.ObjectId,
     ref: Category,
   },
-  questions: [
-    {
-      type: String,
-    },
-  ],
+  questions: [{ 
+    question: String,
+    answer: String
+}],
 
   recruiterEmail: {
     type: String,
@@ -72,13 +71,15 @@ const postSchema: Schema<IPost> = new Schema<IPost>({
   isListed: {
     type: Boolean,
     required: true,
-    default: true,
+    default: false,
   },
   createdAt: {
     type: Date,
     default: Date.now(),
   },
 });
+
+
 
 const Post = mongoose.model<IPost>("Post", postSchema);
 export { Post };

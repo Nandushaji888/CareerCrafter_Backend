@@ -8,9 +8,10 @@ export const createPost_useCase = (dependencies: any) => {
 
   const executeFunction = async(data:IPost)=> {
     const postData = await postRepository?.createPost(data)
-
+    // console.log(postData);
+    
     if(postData.status){
-        return { status: true, user: postData, message:'Job Post created successfully' };
+        return { status: true, user: postData?.response, message:'Job Post created successfully' };
         
     }else{
         return { status: false, message:'Error in creating Job post' };

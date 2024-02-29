@@ -23,8 +23,8 @@ export const verifyOTP_useCase = (dependencies: any) => {
         process.env.REFRESH_SECRET_KEY!,
         process.env.REFRESH_EXPIRY!
       );
-      console.log(accessToken);
-      console.log(refreshToken);
+      // console.log(accessToken);
+      // console.log(refreshToken);
       
       return { status: true, user: addUserData,refreshToken :refreshToken,accessToken:accessToken };
     } else {

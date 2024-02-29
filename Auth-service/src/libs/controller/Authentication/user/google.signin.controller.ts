@@ -19,8 +19,11 @@ const userGoogleAuthController = async(req:Request,res:Response)=> {
 const useCaseInstance = await userGoogleAuthuseCase(dependencies);
 if (useCaseInstance) {
     const response = await useCaseInstance.executeFunction(data);
+    console.log('response in controller');
+    console.log(response);
+    
     if(response.status){
-        res.status(200).json( {status:response.status,user_accessToekn:response?.user_accessToekn,user:response?.user})
+        res.status(200).json( {status:response.status,user_accessToekn:response?.user_accessToekn,user:response?.user,googleSignup:response?.googleSignup})
     }else{
          res.status(500).json({status:false, message:response?.message})
     }

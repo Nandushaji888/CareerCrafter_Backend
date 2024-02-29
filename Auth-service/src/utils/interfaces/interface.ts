@@ -8,21 +8,23 @@ export interface IUser {
     name: string;
     email: string;
     phone: string;
-    password: string;
+    password?: string;
     type: AuthType;
     status: boolean;
     isGoogle:boolean;
+    createdOn:Date
 }
 
 export interface IRecruiter {
     name: string;
     email: string;
     phone: string;
-    password: string;
+    password?: string;
     worksAt:string,
     type: AuthType;
     status: boolean;
     isGoogle:boolean;
+    createdOn:Date
 }
 
 export interface IAdmin {

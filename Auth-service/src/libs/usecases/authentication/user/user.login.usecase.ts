@@ -10,7 +10,7 @@ export const userLogin_useCase = (dependencies: any) => {
     const response = await authenticationRepository?.findUser(email);
 
     if (!response.status) {
-      return { status: false, message: "Email or Password is incorrect" };
+      return { status: false, message: response?.message };
     } else {
       const { user } = response;
       //   console.log(user);

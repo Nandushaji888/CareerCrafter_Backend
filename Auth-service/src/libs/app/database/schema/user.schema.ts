@@ -30,6 +30,10 @@ const userSchema: Schema<IUser> = new Schema<IUser>({
   isGoogle:{
     type:Boolean,
     default:false
+  },
+  createdOn:{
+    type:Date,
+    default:Date.now()
   }
 });
 

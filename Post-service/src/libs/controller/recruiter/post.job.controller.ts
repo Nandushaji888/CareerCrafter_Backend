@@ -1,5 +1,6 @@
 
 import { Response, Request } from "express";
+import { postProducer } from "../../../events/postProducer";
 
 export default (dependencies: any) => {
   const {
@@ -7,24 +8,22 @@ export default (dependencies: any) => {
   } = dependencies;
 
   const createUserController = async (req: Request, res: Response) => {
-    const {  } = req.body;
 
-    // console.log(req.body);
 
-    const data = {...req.body.formData}
-    console.log(data);
+    const data = {...req.body.data}
+    // console.log('data.questions');
+    // console.log(data.questions);
     
-    //   name: name,
-    //   email: email,
-    //   phone: phone,
-    //   password: password,
-    // };
-    // console.log("data", data);
+    console.log('data in controller');
+    console.log(data);
+   
 
     const response = await createPost_useCase(dependencies).executeFunction(data);
-    // console.log(response);
-
+    
     if (response?.status) {
+      // console.log(response?.user);
+      const postData = response?.user
+      await postProducer(postData,'postTopic','createPost')
         res.status(201).json({status:response?.status,message:response?.message})
 
     } else {

@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import {userProducer} from '../../../../events/userProducer'
 
 export default (dependencies: any) => {
   const {
@@ -15,8 +16,19 @@ export default (dependencies: any) => {
       );
 
       if (response.status) {
-        const { user, accessToken, refreshToken } = response;
 
+        console.log('response');
+        console.log(response);
+        
+        const {  accessToken, refreshToken } = response;
+      
+        const user = response.user.response
+
+        
+
+        // console.log('user');
+        // console.log(user);
+        
         req.session.refreshToken = refreshToken;
         res.cookie("user-accessToken", accessToken, {
           maxAge: 300000,
@@ -29,8 +41,28 @@ export default (dependencies: any) => {
           secure: true,
           sameSite: "strict",
         });
+        const userData = {
+          _id:user?._id,
+          name:user?.name,
+          email:user?.email,
+          phone:user?.phone || "",
+          isGoogle:user?.isGoogle,
+          type:user?.type,
+          status:user?.status,
+          createdOn:user?.createdOn
+        }
+        // console.log('userData');
+        // console.log(userData);
+
+        
+        
+        await userProducer(userData, 'authTopic', 'createUser');
+
+
+
         req.session.Otp = undefined;
         req.session.userData = undefined;
+        
 
         res
           .status(201)

@@ -10,7 +10,7 @@ export const userGoogleAuthuseCase = async (dependencies: any) => {
   } = dependencies;
 
   const executeFunction = async (data: IUser) => {
-    console.log(data);
+    // console.log(data);
     const response = await authenticationRepository.findUser(data.email);
 
     if (response.status) {
@@ -30,12 +30,16 @@ export const userGoogleAuthuseCase = async (dependencies: any) => {
     } else {
       const response = await authenticationRepository?.createUser(data);
       if (response) {
-        return generateTokens(response.user);
+        console.log('response in usecase');
+        console.log(response);
+        
+        const googleSignup:boolean=true
+        return generateTokens(response.response,googleSignup);
       }
     }
  
   };
-  const generateTokens = (user: IUser) => {
+  const generateTokens = (user: IUser,googleSignup?:boolean) => {
     const user_accessToken = createAccessToken(
       user,
       process.env.ACCESS_SECRET_KEY || "",
@@ -46,7 +50,13 @@ export const userGoogleAuthuseCase = async (dependencies: any) => {
       process.env.REFRESH_SECRET_KEY || "",
       process.env.REFRESH_EXPIRY || ""
     );
-    return { status: true, user_accessToken, user };
+    if(googleSignup){
+
+      return { status: true, user_accessToken, user,googleSignup:googleSignup };
+    }else{
+      return { status: true, user_accessToken, user };
+
+    }
   };
 
   return { executeFunction };

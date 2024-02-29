@@ -14,24 +14,24 @@ export enum employmentType{
 }
 
 export interface IPost {
-    postName: string;
-    company: string;
-    responsabilities:string,
-    jobDescription:string,
+    postName?: string;
+    company?: string;
+    responsibilities?:string,
+    jobDescription?:string,
     skillsRequired?:string,
     qualification?:string,
     salary?:string,
     category?:ObjectId,
-    questions?:string[],
+    questions?:IQuestion[],
     skills?:string,
-    recruiterEmail:string,
-    recruitingPlace:string,
-    createdAt:Date,
-    closingDate :Date,
-    workArrangementType:WorkArrangementType,
-    employmentType:employmentType,
+    recruiterEmail?:string,
+    recruitingPlace?:string,
+    createdAt?:Date,
+    closingDate?:Date,
+    workArrangementType?:WorkArrangementType,
+    employmentType?:employmentType,
     isPremium?:boolean,
-    isListed:boolean
+    isListed?:boolean
   
 }
 
@@ -41,3 +41,9 @@ export interface ICategory{
     isListed:boolean,
     createdAt:Date,
 }
+
+export interface IQuestion {
+    question: string;
+    answer: string;
+}
+

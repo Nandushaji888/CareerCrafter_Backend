@@ -11,3 +11,4 @@ export default (dependencies: any) => {
 
   return router
 };
+

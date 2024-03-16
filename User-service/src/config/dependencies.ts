@@ -3,16 +3,16 @@ import {
   updateUser_useCase,
   createPostUseCase,
   createUserUsecase,
-  get_All_Posts_useCase,
   get_userData_useCase,
-  get_all_users_usecase
+  get_all_users_usecase,
+  change_userStatus_useCase
 } from "../libs/usecase";
 
 const useCase: any = {
   updateUser_useCase,
-  get_All_Posts_useCase,
   get_userData_useCase,
-  get_all_users_usecase
+  get_all_users_usecase,
+  change_userStatus_useCase
 };
 
 const repository: any = {

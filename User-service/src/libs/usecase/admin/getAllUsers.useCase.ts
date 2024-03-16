@@ -13,4 +13,4 @@ export const get_all_users_usecase =(dependencies:any)=> {
         }
     }
     return {executeFunction}
-}
+}   

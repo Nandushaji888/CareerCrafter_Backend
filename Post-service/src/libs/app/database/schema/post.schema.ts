@@ -18,7 +18,6 @@ const postSchema: Schema<IPost> = new Schema<IPost>({
   responsibilities: {
     type: String,
     required: true,
-
   },
   jobDescription: {
     type: String,
@@ -37,10 +36,12 @@ const postSchema: Schema<IPost> = new Schema<IPost>({
     type: mongoose.Schema.Types.ObjectId,
     ref: Category,
   },
-  questions: [{ 
-    question: String,
-    answer: String
-}],
+  questions: [
+    {
+      question: String,
+      answer: String,
+    },
+  ],
 
   recruiterEmail: {
     type: String,
@@ -49,6 +50,9 @@ const postSchema: Schema<IPost> = new Schema<IPost>({
   recruitingPlace: {
     type: String,
     required: true,
+  },
+  recruiterId: {
+    type: String,
   },
 
   closingDate: {
@@ -65,7 +69,11 @@ const postSchema: Schema<IPost> = new Schema<IPost>({
   isPremium: {
     type: Boolean,
     required: true,
-    default:false
+    default: false,
+  },
+  isRejected: {
+    type: Boolean,
+    default: false,
   },
 
   isListed: {
@@ -78,8 +86,6 @@ const postSchema: Schema<IPost> = new Schema<IPost>({
     default: Date.now(),
   },
 });
-
-
 
 const Post = mongoose.model<IPost>("Post", postSchema);
 export { Post };

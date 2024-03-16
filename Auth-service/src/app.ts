@@ -5,6 +5,7 @@ import { routes } from "./router";
 import session, { MemoryStore, SessionOptions, SessionData } from 'express-session'
 import dotenv from "dotenv";
 import cookieParser from 'cookie-parser'
+import {userStatusChangeConsumer} from './events/userStatusChangeConsumer'
 dotenv.config();
 
 declare module 'express-session' {
@@ -58,7 +59,7 @@ app.use(
 );
 
 app.use(express.urlencoded({ extended: true }));
-
+userStatusChangeConsumer(dependencies)
 app.use("/api", routes(dependencies));
 
 export { app };

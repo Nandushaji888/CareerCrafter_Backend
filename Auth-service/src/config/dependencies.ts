@@ -10,7 +10,9 @@ import {
   adminLogin_useCase,
   userForgotPassword_useCase,
   userNewPassword_useCase,
-  userGoogleAuthuseCase
+  userGoogleAuthuseCase,
+  userStatusChangeUsecase,
+  protect_route_useCase,
 } from "../libs/usecases";
 
 const useCase: any = {
@@ -23,13 +25,18 @@ const useCase: any = {
   adminLogin_useCase,
   userForgotPassword_useCase,
   userNewPassword_useCase,
-  userGoogleAuthuseCase
+  userGoogleAuthuseCase,
+  protect_route_useCase,
 };
 const repository: any = {
   authenticationRepository,
+};
+const consumeUseCase: any = {
+  userStatusChangeUsecase,
 };
 
 export default {
   useCase,
   repository,
+  consumeUseCase,
 };

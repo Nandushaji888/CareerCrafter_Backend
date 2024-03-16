@@ -23,12 +23,13 @@ export default (dependencies: any) => {
       res.cookie("user_accessToken", user_accessToken, {
         maxAge: 300000,
         httpOnly: true,
-        secure: true,
+        secure:true,
+        sameSite:"strict"
       });
       res.cookie("user_refreshToken", user_refreshToken, {
         maxAge: 3600000,
         httpOnly: true,
-        secure: true,
+        secure:true,
         sameSite: "strict",
       });
 

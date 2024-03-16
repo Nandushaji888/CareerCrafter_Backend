@@ -17,7 +17,7 @@ export const postConsumer =async(dependencies:any)=> {
             const messagetype=jsondata?.type
 
             if(messagetype =='createPost'){
-                console.log('consumer',jsondata);
+                // console.log('consumer',jsondata);
                 await createPostController(dependencies,jsondata.data)
                 
             }

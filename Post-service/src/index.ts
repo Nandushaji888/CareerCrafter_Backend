@@ -1,5 +1,7 @@
 import {app} from './app'
 import connectDB from './config/db'
+import dotenv from "dotenv";
+dotenv.config();
 
 const start = async()=> {
     try {
@@ -10,8 +12,10 @@ const start = async()=> {
     }
 }
 
-app.listen(4001,()=>{
-    console.log('post-server started at 4001');
+const port =  process.env.PORT || 5001
+
+app.listen(port,()=>{
+    console.log(`post-server started at ${port} `);
     
 })
 

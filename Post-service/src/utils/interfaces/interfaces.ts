@@ -31,9 +31,13 @@ export interface IPost {
     workArrangementType?:WorkArrangementType,
     employmentType?:employmentType,
     isPremium?:boolean,
-    isListed?:boolean
+    isListed?:boolean,
+    recruiterId?:string,
+    isRejected?:boolean
   
 }
+
+
 
 export interface ICategory{
     categoryName:string,

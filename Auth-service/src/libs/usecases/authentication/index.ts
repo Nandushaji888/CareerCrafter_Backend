@@ -8,6 +8,7 @@ import {adminLogin_useCase} from './admin/admin.login.usecse'
 import {userForgotPassword_useCase} from './user/user.forgotPassword.usecase'
 import {userNewPassword_useCase} from './user/create.new.password.usecase'
 import {userGoogleAuthuseCase} from './user/user.google.auth.usecase'
+import { protect_route_useCase } from "./user/protect.route.usecase";
 export {
   addUser_useCases,
   userLogin_useCase,
@@ -18,5 +19,6 @@ export {
   adminLogin_useCase,
   userForgotPassword_useCase,
   userNewPassword_useCase,
-  userGoogleAuthuseCase
+  userGoogleAuthuseCase,
+  protect_route_useCase
 };

@@ -26,12 +26,5 @@ export default{
             return {status:false,message:'error in creating post'}
         }
     },
-    getAllPosts:async()=> {
-        const postDatas= await Post.find({})
-        if(postDatas){
-            return {status:true,postDatas}
-        }else{
-            return {status:false,message:'error in getting post datas'}
-        }
-    }
+  
 }

@@ -13,9 +13,13 @@ declare global {
 
 export const verifyUser = (req: Request, res: Response, next: NextFunction) => {
   const user_accessToken = req.cookies.user_accessToken;
+
+
+
+
   
   if (!user_accessToken) {
-    return res.json({ status: false, message: 'Token not provided' });
+    return res.status(401).json({ status: false, message: 'Unauthorized - No token Provided"' });
   } else {
     jwt.verify(user_accessToken, process.env.ACCESS_SECRET_KEY || "", (err: jwt.VerifyErrors | null, decoded: any) => {
       if (err) {
@@ -23,6 +27,9 @@ export const verifyUser = (req: Request, res: Response, next: NextFunction) => {
       } else {
         const decodedUser = decoded.user as IUser;
         req.user = decodedUser;
+        console.log('req.user');
+        console.log(req.user);
+        
         next();
       }
     });

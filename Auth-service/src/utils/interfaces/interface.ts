@@ -33,3 +33,8 @@ export interface IAdmin {
     password: string;
     type: AuthType;
 }
+
+export interface statusData{
+    id:string,
+    status:string
+}

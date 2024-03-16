@@ -94,6 +94,28 @@ export default {
     }else{
       return {status:false,message:'Error in fetching all users'}
     }
-  }
+  },
+    changeStatus: async (id:string,status:string) => {
+
+    let state = true;
+    if (status == "Active") state = false;
+
+    try {
+     const response= await User.findOneAndUpdate({ _id: id }, { status: state });
+ console.log(response);
+     
+      const users = await User.find({}).sort({createdOn:-1})
+      if(response){
+
+        return {status:true,users:users,message:'User status updated'}
+      }else{
+        return { status: false, message:'Error in changing user status'}
+      }
+
+    } catch (err) {
+        console.log('Error in changing user status',err);
+    }
+  },
+  
 
 };

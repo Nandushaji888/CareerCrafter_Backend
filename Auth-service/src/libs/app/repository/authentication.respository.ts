@@ -1,3 +1,4 @@
+import { statusData } from "../../../utils/interfaces/interface";
 import { schema } from "../database";
 const { User, Recruiter, Admin } = schema;
 
@@ -47,12 +48,15 @@ export default {
       if (user) {
         if (user.status) {
           return { status: true, user: user };
-        }else{
-
-          return { status: false,message:'User is blocked by admin contact admin@gmail.com for further enquiry' };
+        } else {
+          return {
+            status: false,
+            message:
+              "User is blocked by admin contact admin@gmail.com for further enquiry",
+          };
         }
       } else {
-        return { status: false,message:'Email or Password is incorrect' };
+        return { status: false, message: "Email or Password is incorrect" };
       }
     } catch (error) {
       console.log(error, "Error while finding a user");
@@ -151,16 +155,47 @@ export default {
       console.log(error, "error in isGoogleTrue");
     }
   },
-  // changeStatus: async (id:string,status:string) => {
-  //   let state = true;
-  //   if (status == "Active") state = false;
+  changeStatus: async (data: statusData) => {
+    const { id, status } = data;
+    console.log("data in repository");
+    console.log(data);
 
-  //   try {
-  //    const response= await User.findOneAndUpdate({ _id: id }, { status: state });
-  //     const users = await User.find({});
+    let state = true;
+    if (status == "Active") state = false;
 
-  //   } catch (err) {
-  //       console.log('Error in changing user status',err);
-  //   }
-  // },
+    try {
+      const response = await User.findOneAndUpdate(
+        { _id: id },
+        { status: state }
+      );
+      console.log(response);
+      if (response) {
+        return { status: true, user: response, message: "User status updated" };
+      } else {
+        return { status: false, message: "Error in changing user status" };
+      }
+    } catch (err) {
+      console.log("Error in changing user status", err);
+    }
+  },
+  findUserById: async (userId: string) => {
+    try {
+      const user = await User.findOne({ _id: userId }).select("-password")
+      if (user) {
+        if (user.status) {
+          return { status: true, user: user };
+        } else {
+          return {
+            status: false,
+            message:
+              "User is blocked by admin contact admin@gmail.com for further enquiry",
+          };
+        }
+      } else {
+        return { status: false, message: "Email or Password is incorrect" };
+      }
+    } catch (error) {
+      console.log(error, "Error while finding a user");
+    }
+  },
 };

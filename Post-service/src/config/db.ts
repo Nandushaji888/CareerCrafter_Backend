@@ -2,8 +2,10 @@ import mongoose from "mongoose";
 
 const connectDB = async () => {
   try {
-    console.log("entered post connect db");
-    await mongoose.connect("mongodb://127.0.0.1:27017/CareerCrafter-postservice");
+    const dbURI = process.env.DB as string;
+    // mongoose.set('useNewUrlParser', true);
+
+    await mongoose.connect(dbURI);
     console.log("Connected to the MongoDB database");
   } catch (error) {
     console.error("Error connecting to the MongoDB database:", error);

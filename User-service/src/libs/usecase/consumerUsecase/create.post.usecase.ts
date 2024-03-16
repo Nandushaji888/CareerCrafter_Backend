@@ -7,7 +7,7 @@ export const createPostUseCase = (dependencies: any) => {
 
   const executeFunction=async(data:IPost)=>{
         const response = await postRepository.storePost(data)
-               console.log(response);
+              //  console.log(response);
                                                
     if (!response.status) {
       return { message: "Error occured in creating post", status: false };

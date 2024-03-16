@@ -23,7 +23,6 @@ export default (dependencies: any) => {
     if (response?.status) {
       // console.log(response?.user);
       const postData = response?.user
-      await postProducer(postData,'postTopic','createPost')
         res.status(201).json({status:response?.status,message:response?.message})
 
     } else {

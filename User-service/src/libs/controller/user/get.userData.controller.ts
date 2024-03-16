@@ -5,14 +5,11 @@ export default(dependencies:any)=> {
 
     const getUserDataController = async(req:Request,res:Response)=> {
         try {
+            console.log('hereeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee');
+            
             const id = req.params.id
-            // console.log('reached hereee');
-            // console.log(id);
-            
-            
             const response = await get_userData_useCase(dependencies).executeFunction(id)
-            // console.log('response');
-            // console.log(response);
+
             if(response.status){
                 res.status(200).json({status:response?.status,user:response?.user})
             }else{

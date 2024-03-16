@@ -7,7 +7,6 @@ export const createAccessToken = (
   accessTokenSecretKey: string, 
   expiration: string 
 ) => {
-  console.log("access token creating");
   const token = jwt.sign({ user }, accessTokenSecretKey, {
     expiresIn: expiration, 
   });
@@ -28,7 +27,6 @@ export const clearAccessTokenFromCookie = (
     cookieName: string,
     res: Response
   ) => {
-    console.log("attachAccesTokenToCookie - not http only ", "development");
     res.cookie(cookieName, {
       httpOnly: false,
       secure: false,

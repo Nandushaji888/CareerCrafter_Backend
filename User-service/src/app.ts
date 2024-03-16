@@ -1,15 +1,24 @@
 import express from "express";
 import cors from "cors";
-import dotenv from "dotenv";
+import dotenv from 'dotenv'
+import cookieParser from 'cookie-parser'
+
+
 import dependencies from './config/dependencies'
 import {routes} from './router'
 import { userConsumer } from "./events/authConsumer";
 import { postConsumer } from "./events/postConsumer";
 
+
+dotenv.config()
+
+
 const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded());
+app.use(cookieParser())
+
 
 app.use(
   cors({

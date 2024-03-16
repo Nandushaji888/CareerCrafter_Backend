@@ -7,7 +7,7 @@ const consumer=kafka.consumer({
 
 export const userConsumer = async(dependencies:any)=>{
     try {
-        console.log('reached userConsumer');
+        // console.log('reached userConsumer');
         
         await consumer.connect()
         await consumer.subscribe({topic:"authTopic",fromBeginning:true})
@@ -18,7 +18,7 @@ export const userConsumer = async(dependencies:any)=>{
                 const jsondata=JSON.parse(jsonstring)
                 const messagetype=jsondata?.type
                 if(messagetype == 'createUser'){
-                    console.log('consumer',jsondata);
+                    // console.log('consumer',jsondata);
                     
                     await createUserController(dependencies,jsondata.data)
                 }

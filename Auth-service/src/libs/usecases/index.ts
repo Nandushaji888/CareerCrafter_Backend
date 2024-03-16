@@ -8,8 +8,11 @@ import {
   adminLogin_useCase,
   userForgotPassword_useCase,
   userNewPassword_useCase,
-  userGoogleAuthuseCase
+  userGoogleAuthuseCase,
+  protect_route_useCase
 } from "./authentication";
+
+import {userStatusChangeUsecase} from './consumerUsecase'
 
 export {
   addUser_useCases,
@@ -21,5 +24,7 @@ export {
   adminLogin_useCase,
   userForgotPassword_useCase,
   userNewPassword_useCase,
-  userGoogleAuthuseCase
+  userGoogleAuthuseCase,
+  userStatusChangeUsecase,
+  protect_route_useCase
 };

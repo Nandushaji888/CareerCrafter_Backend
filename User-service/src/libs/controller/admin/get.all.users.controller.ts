@@ -3,7 +3,7 @@ export default (dependencies:any)=> {
     const {useCase:{get_all_users_usecase}} = dependencies
 
     const getAllUsersController = async(req:Request,res:Response)=> {
-        console.log('heree');
+        // console.log('heree');
         
         const response = await get_all_users_usecase(dependencies).executeFunction()
 

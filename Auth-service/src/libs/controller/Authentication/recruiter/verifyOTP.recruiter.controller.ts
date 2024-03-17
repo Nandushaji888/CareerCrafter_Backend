@@ -17,16 +17,28 @@ export default (dependencies: any) => {
 
       if (response.status) {
         const { recruiter, accessToken, refreshToken } = response;
-        req.session.refreshToken = refreshToken;
-        const expirationDate = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000);
-        res.cookie("accessToken", accessToken, {
-          expires: expirationDate,
+        // req.session.refreshToken = refreshToken;
+        // const expirationDate = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000);
+        // res.cookie("accessToken", accessToken, {
+        //   expires: expirationDate,
+        //   httpOnly: true,
+        //   secure: true,
+        // });
+        res.cookie("recruiter_accessToken", accessToken, {
+          maxAge: 300000,
           httpOnly: true,
-          secure: true,
+          secure:true,
+          sameSite:"strict"
+        });
+        res.cookie("recruiter_refreshToken", refreshToken, {
+          maxAge: 3600000,
+          httpOnly: true,
+          secure:true,
+          sameSite:"strict"
         });
         req.session.rOtp = undefined;
         req.session.recruiterData=undefined
-        res.status(201).json({status:true,accessToken:accessToken,recruiter:recruiter})
+        res.status(201).json({status:true,recruiter:recruiter})
 
       } else {
         res.status(400).json({ status: false, message: response.message });

@@ -21,7 +21,7 @@ export default (dependencies: any) => {
 
       req.session.refreshToken = user_refreshToken;
       res.cookie("user_accessToken", user_accessToken, {
-        maxAge: 300000,
+        maxAge: 60000,
         httpOnly: true,
         secure:true,
         sameSite:"strict"

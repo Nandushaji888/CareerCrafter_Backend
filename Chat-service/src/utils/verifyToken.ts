@@ -1,14 +1,12 @@
 import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
-import { createAccessToken } from "./jwt";
-import { IUser } from "../interfaces/interface";
-// import { IUser } from "../interface/interface";
+import { IRecruiter, IUser } from "./interface";
 
 // Extend Request interface to include user property
 declare global {
   namespace Express {
     interface Request {
-      user?: IUser;
+      user?: IUser | IRecruiter;
     }
   }
 }
@@ -46,10 +44,22 @@ export const verifyUser = (req: Request, res: Response, next: NextFunction) => {
         return res.status(401).json({ status: false, message: 'Unauthorized - No token Provided' });
       }
     } else {
-      const decodedUser = decoded.user as IUser;
+      const decodedUser = decoded.user as IUser | IRecruiter;
       req.user = decodedUser;
       next();
     }
   });
 };
+
+
+export const createAccessToken = (
+    user: any, 
+    accessTokenSecretKey: string, 
+    expiration: string 
+  ) => {
+    const token = jwt.sign({ user }, accessTokenSecretKey, {
+      expiresIn: expiration, 
+    });
+    return token;
+  };
 

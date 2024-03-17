@@ -52,3 +52,14 @@ export const verifyUser = (req: Request, res: Response, next: NextFunction) => {
   });
 };
 
+
+export const createRefreshToken = (
+  user: any, 
+  refreshTokenSecretKey: string, 
+  expiration: string 
+) => {
+  return jwt.sign({ user }, refreshTokenSecretKey, { 
+    expiresIn: expiration 
+  });
+};
+

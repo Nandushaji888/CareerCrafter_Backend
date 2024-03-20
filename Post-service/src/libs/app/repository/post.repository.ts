@@ -168,10 +168,7 @@ export default {
   recruiterListJobs: async (id: string) => {
     try {
       const response = await Post.find({ recruiterId: id }).sort({createdAt: -1 })
-      if (response) {
-        console.log('response in repository');
-        console.log(response);
-        
+      if (response) {       
         return { status: true, jobList: response };
       } else {
         return { status: false, message: "Unable to List Jobs at the moment" };

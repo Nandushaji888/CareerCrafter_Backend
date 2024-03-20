@@ -10,16 +10,16 @@ const chatParticipantsSchema = new mongoose.Schema<IChatParticipant>(
   {
     name: {
       type: String,
-      required: true,
+      // required: true,
     },
     email: {
       type: String,
-      required: true,
-      unique: true,
+      // required: true,
+      // unique: true,
     },
     type: {
       type: String,
-      required: true,
+      // required: true,
       enum: ["user", "recruiter"],
     },
   },

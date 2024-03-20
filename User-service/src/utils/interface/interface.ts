@@ -20,6 +20,9 @@ export interface IUser {
     profilePic:string;
     createdOn:Date;
     editedOn:Date;
+    currentLoaction:string;
+    readyToReallocate:boolean;
+    secondarySkills:string;
 }
 
 export enum AuthType {

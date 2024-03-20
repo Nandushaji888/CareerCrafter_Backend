@@ -5,6 +5,7 @@ export const createUserUsecase = (dependencies: any) => {
   const {repository: { userRepository }} = dependencies;
   const executeFunction = async (data: IUser) => {
 
+    console.log(userRepository);
     
     const response = await userRepository.storeUser(data);
       //  console.log(response);

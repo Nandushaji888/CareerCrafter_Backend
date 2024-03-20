@@ -6,14 +6,7 @@ export default (dependencies: any) => {
   } = dependencies;
   const getAllPosts = async (req: Request, res: Response) => {
     try {
-      // console.log('hjhkjasdhfjklhsfdajklhsfdkl');
-    // console.log('hereeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee');
 
-    console.log(req.query);
-    
-    
-      
-      
       const {
         page = 1,
         limit = 2,

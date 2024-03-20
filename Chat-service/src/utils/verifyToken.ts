@@ -12,17 +12,20 @@ declare global {
 }
 
 export const verifyUser = (req: Request, res: Response, next: NextFunction) => {
-  const user_accessToken = req.cookies.user_accessToken;
-  const user_refreshToken = req.cookies.user_refreshToken;
 
 
-  
+  const user_accessToken = req.cookies.user_accessToken ? req.cookies.user_accessToken :req.cookies.recruiter_accessToken
+  const user_refreshToken = req.cookies.user_refreshToken ? req.cookies.user_refreshToken : req.cookies.recruiter_refreshToken 
+
+
+
+console.log(user_accessToken);
+console.log(user_refreshToken);
 
 
   jwt.verify(user_accessToken, process.env.ACCESS_SECRET_KEY || "", (err: jwt.VerifyErrors | null, decoded: any) => {
     if (err) {
-      console.log('err.name');
-      console.log(err.name);
+
       
       if (err.name === 'JsonWebTokenError' && user_refreshToken) {
         
@@ -31,13 +34,16 @@ export const verifyUser = (req: Request, res: Response, next: NextFunction) => {
             return res.status(401).json({ status: false, message: 'Invalid Refresh Token' });
           }
           const user = decodedRefresh.user;
-          const newAccessToken = createAccessToken(user, process.env.ACCESS_SECRET_KEY || "", "15m");
+          
+          
+          const newAccessToken = createAccessToken(user, process.env.ACCESS_SECRET_KEY || "", "5m");
           res.cookie("user_accessToken", newAccessToken, {
             maxAge: 300000, //5 minutes in milliseconds
             httpOnly: true,
             secure: true,
             sameSite: "strict"
           });
+          req.user = decodedRefresh.user;
           next();
         });
       } else {
@@ -46,6 +52,8 @@ export const verifyUser = (req: Request, res: Response, next: NextFunction) => {
     } else {
       const decodedUser = decoded.user as IUser | IRecruiter;
       req.user = decodedUser;
+   
+      
       next();
     }
   });

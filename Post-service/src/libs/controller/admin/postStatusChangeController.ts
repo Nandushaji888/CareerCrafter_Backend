@@ -16,8 +16,6 @@ export default (dependencies: any) => {
         dependencies
       ).executeFunction(id, status);
 
-      // console.log('response in controller');
-      // console.log(response);
       
       if (response.status) {
         res

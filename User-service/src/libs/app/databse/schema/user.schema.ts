@@ -33,6 +33,11 @@ const userSchema: Schema<IUser> = new Schema<IUser>({
   qualification: { type: String },
   skills: { type: String },
   profilePic: { type: String },
+  currentLoaction:{type:String},
+  readyToReallocate:{type:Boolean},
+  secondarySkills:{type:String}
+
+
 });
 
 const User = mongoose.model<IUser>("User", userSchema);

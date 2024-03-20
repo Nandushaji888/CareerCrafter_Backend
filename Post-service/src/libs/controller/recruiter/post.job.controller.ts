@@ -11,11 +11,7 @@ export default (dependencies: any) => {
 
 
     const data = {...req.body.data}
-    // console.log('data.questions');
-    // console.log(data.questions);
-    
-    console.log('data in controller');
-    console.log(data);
+
    
 
     const response = await createPost_useCase(dependencies).executeFunction(data);

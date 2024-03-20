@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import { recruiterCreatedProducer } from "../../../../events/recruiterCreatedProducer";
 
 export default (dependencies: any) => {
   const {
@@ -36,6 +37,9 @@ export default (dependencies: any) => {
           secure:true,
           sameSite:"strict"
         });
+
+        await recruiterCreatedProducer(recruiter?.response,'recruiterCreatedTopic','recruiterCreated')
+
         req.session.rOtp = undefined;
         req.session.recruiterData=undefined
         res.status(201).json({status:true,recruiter:recruiter})

@@ -1,11 +1,14 @@
 import {chatRepository} from '../libs/app/repository'
-import {get_message_usecase} from '../libs/usecase'
+import {send_message_usecase,get_messaged_users_usecase,createChatParticipantsUsecase,get_messages_usecase} from '../libs/usecase'
 
 const useCase: any = {
- get_message_usecase
+ send_message_usecase,
+ get_messages_usecase,
+ createChatParticipantsUsecase,
+ get_messaged_users_usecase
     };
     const repository: any = {
-        repository:chatRepository
+      chatRepository:chatRepository
     };
     
     export default {

@@ -35,7 +35,7 @@ export default {
       password: data.password,
       isGoogle: data.isGoogle ? true : false,
     };
-    let response = await User.create(userData);
+    let response = await User.create(userData)
     if (response) {
       return { status: true, message: "user created", response };
     } else {

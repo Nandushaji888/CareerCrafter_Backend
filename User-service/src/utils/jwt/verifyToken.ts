@@ -13,10 +13,16 @@ declare global {
 }
 
 export const verifyUser = (req: Request, res: Response, next: NextFunction) => {
+
+  console.log('reached hereeeeeeeeeeeee');
+  
   const user_accessToken = req.cookies.user_accessToken;
   const user_refreshToken = req.cookies.user_refreshToken;
 
+  if(!user_refreshToken){
+    return res.status(401).json({ status: false, message: 'Invalid Refresh Token' });
 
+  }
   
 
 

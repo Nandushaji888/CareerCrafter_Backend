@@ -9,8 +9,7 @@ export default (dependencies:any)=> {
         const id = req.params.id
         const response = await recruiter_list_jobs(dependencies).executeFunction(id)
 
-        console.log('response in controllerrrrrrrrrrrr');
-        console.log(response);
+
 
         if(response?.status){
             res.status(200).json({status:response?.status,jobList:response?.jobList})

@@ -1,20 +1,29 @@
 import { Request, Response } from "express";
-import { getReceiverSocketId, io } from "../../../utils/socket";
+import { getReceiverSocketId, io } from "../../../socket/socket";
 export default (dependencies: any) => {
   const {
-    useCase: { get_message_usecase },
+    useCase: { send_message_usecase },
   } = dependencies;
 
-  const getMessageController = async (req: Request, res: Response) => {
+  const sendMessageController = async (req: Request, res: Response) => {
     try {
       const { message } = req.body;
       const { id: receiverId } = req.params;
+
       const senderId = req.user?._id;
-      const response = await get_message_usecase(dependencies).executeFunction(
-        senderId,
-        receiverId,
-        message
-      );
+
+      console.log('message');
+      console.log(message);
+      console.log('receiverId');
+      console.log(receiverId);
+      console.log('senderId');
+      console.log(senderId);
+      
+      
+      
+      const response = await send_message_usecase(
+        dependencies
+      )?.executeFunction(senderId, receiverId, message);
 
       if (response?.status) {
         const receiverSocketId = getReceiverSocketId(receiverId);
@@ -29,5 +38,5 @@ export default (dependencies: any) => {
       res.status(500).json({ error: "Internal server error" });
     }
   };
-  return getMessageController
+  return sendMessageController;
 };
